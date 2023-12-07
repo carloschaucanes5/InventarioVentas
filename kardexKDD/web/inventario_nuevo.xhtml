@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./plantillas/tareas.xhtml">
+
+            <ui:define name="content">
+
+                <center>
+                    <h3>Datos Nuevo Producto</h3>
+                    <hr/>
+                    <p:growl id="mensageGeneral"   autoUpdate="true" showDetail="true" />
+                    <h:form id="formInventario">
+                        <h:panelGrid columns="3" title="Acceso al sistema de Ventas">
+                            
+                            <p:outputLabel for="pro_nombre" value="Nombre"/>
+                            <p:inputText  id="pro_nombre" size="30" maxlength="100" required="true" value="#{inventarioBean.inventario.nombre}">
+                                <f:validator validatorId="validarVacio"/>
+                            </p:inputText>
+                            <p:message for="pro_nombre"/>
+                            
+                            <p:outputLabel for="pro_concentracion" value="Concentración"/>
+                            <p:inputText  id="pro_concentracion" size="30" maxlength="50" value="#{inventarioBean.inventario.concentracion}">
+                                <f:validator validatorId="validarVacio"/>
+                            </p:inputText>
+                            <p:message for="pro_concentracion"/>
+                            
+                            <p:outputLabel for="pro_presentacion" value="Presentación"/>
+                            <p:inputText  id="pro_presentacion" size="30" maxlength="50" value="#{inventarioBean.inventario.presentacion}">
+                                <f:validator validatorId="validarVacio"/>
+                            </p:inputText>
+                            <p:message for="pro_presentacion"/>
+                            
+                            
+                            <p:outputLabel for="pro_iva" value="IVA"/>
+                            <p:inputText id="pro_iva"  size="4" value="#{inventarioBean.inventario.iva}">
+                                <f:convertNumber integerOnly="true"  type="number"/>
+                            </p:inputText>
+                            <p:message for="pro_iva"/>
+                            
+                            <p:outputLabel for="pro_costo" value="Costo/Unidad $" />
+                            <p:inputText id="pro_costo"  size="10" required="true" value="#{inventarioBean.inventario.costo_unitario}">
+                                <f:convertNumber   type="number" maxFractionDigits="2"/>
+                            </p:inputText>
+                            <p:message for="pro_costo"/>
+                            
+                            <p:outputLabel for="pro_precio" value="Precio/Unidad $"/>
+                            <p:inputText id="pro_precio"  size="10" required="true" value="#{inventarioBean.inventario.precio_unitario}">
+                                <f:convertNumber type="number" maxFractionDigits="2"/>
+                            </p:inputText>
+                            <p:message for="pro_precio"/>
+                            
+                            <h:panelGroup/>
+                            
+                            <p:commandButton value="Almacenar"  update="formInventario" actionListener="#{inventarioBean.registrarInventario()}"  action="inventario_nuevo?faces-redirect=true">
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </h:form>
+                    
+
+                </center>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
